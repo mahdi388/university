@@ -15,6 +15,7 @@
       user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
     -->
     <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!--
       Notice the use of %PUBLIC_URL% in the tags above.
       It will be replaced with the URL of the `public` folder during the build.
@@ -25,8 +26,17 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>React App</title>
+    <style>
+      @font-face {
+        font-family: 'iran-sans';
+        src: url('fonts/IRANSansWeb.eot#?')format('eot'), 
+             url('fonts/IRANSansWeb.ttf')format('truetype'), 
+             url('fonts/IRANSansWeb.woff')format('woff'), 
+             url('fonts/IRANSansWeb.woff2')format('woff2'); 
+      }
+    </style>
   </head>
-  <body>
+  <body dir="rtl">
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--
