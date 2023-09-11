@@ -18,7 +18,7 @@ function Students() {
         event.target.reset()
     }
     if (isError) {
-        return <>{error}</>
+        return <>خطا {error.status}</>
     }if(isLoading){
         return <>Loading...</>
     }
