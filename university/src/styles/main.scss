@@ -38,38 +38,4 @@ body{
             }
         }
     }
-    .search{
-        height: 50px;
-        width: 130px;
-        margin-left: 120px;
-        display: flex;
-        align-items: center;
-        input{
-            padding: 5px;
-            font-family: iran-sans;
-            box-sizing: border-box;
-            height: 36px;
-            border-style: solid;
-            border-width: 1px;
-            border-left: none;
-            border-radius: 0 15px 15px 0;
-            border-color: black
-        }
-        input:focus{
-            outline-width: 0;
-        }
-        div{
-            box-sizing: border-box;
-            height: 36px;
-            width: 36px;
-            display: flex;
-            align-items: center;
-            padding: 5px;
-            border-style: solid;
-            border-width: 1px;
-            border-right: none;
-            border-radius: 15px 0 0 15px;
-            cursor: pointer;
-        }
-    }
 }

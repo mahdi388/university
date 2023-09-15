@@ -1,4 +1,5 @@
 import {useGetStudentsQuery,useAddStudentMutation,useDeleteStudentMutation} from '../redux/services/studentsApi'
+import {useAddUnitMutation,useDeleteUnitMutation} from '../redux/services/unitsApi'
 import '../styles/students.scss'
 import { useState } from 'react'
 
@@ -7,15 +8,23 @@ function Students() {
     const [addStudent,{isLoading:isAddingStudent}]=useAddStudentMutation()
     const [deleteStudent]=useDeleteStudentMutation()
     const [pager,setPager]=useState(1)
-    const addStudentHandler=event=>{
+    const [addUnit,{}]=useAddUnitMutation()
+    const [deleteUnit]=useDeleteUnitMutation()
+    const addStudentHandler=async event=>{
         event.preventDefault()
-        addStudent({
-            id:students[students.length-1].id+1,
+        try {
+            var id=students[students.length-1].id+1
+        } catch (error) {
+            var id=1
+        }
+        await addStudent({
+            id:id,
             name:event.target['name'].value,
             family:event.target['family'].value,
             study_field:event.target['study-field'].value
         })
         event.target.reset()
+        addUnit({student:id,lessons:[]})
     }
     if (isError) {
         return <>خطا {error.status}</>
@@ -31,6 +40,9 @@ function Students() {
     for (let i = 0; i <pageLen; i++) {
         pagination.push(students.slice(i*10,i*10+10))
     }
+    if(students.length==0){
+        pagination.push([])
+    }
     const increasePager=()=>{
         if (pager!==pageLen) {
             setPager((prevPage)=>(prevPage+1))
@@ -40,6 +52,12 @@ function Students() {
         if (pager!==1) {
             setPager(pager-1)
         }
+    }
+    const deleteStudentHandler=async studentId=>{
+        await deleteStudent(studentId)
+        fetch('http://localhost:3020/units/?student='+studentId)
+        .then(res=>res.json())
+        .then(res=>deleteUnit(res[0].id))
     }
     return <main>
         <div>
@@ -64,7 +82,7 @@ function Students() {
                         <td>{student.name}</td>
                         <td>{student.family}</td>
                         <td>{student.study_field}</td>
-                        <td><i className='fa fa-trash' onClick={()=>deleteStudent(student.id)}></i></td>
+                        <td><i className='fa fa-trash' onClick={()=>deleteStudentHandler(student.id)}></i></td>
                     </tr>)}
                 </tbody>
             </table>

@@ -28,18 +28,11 @@ function App() {
         </li>
         <li onClick={() => navigate('/units')}>
           <div></div>
-          <span>واحدها</span>
+          <span>انتخاب واحد</span>
           <div></div>
         </li>
       </ul>
-      <div className="search">
-        <input type="text" placeholder='جست‌ و جو'/>
-        <div>
-          <i className="fa fa-search"></i>
-        </div>
-      </div>
     </nav>
-    {/* <main> */}
       <Routes>
         <Route path='/students' element={<Students/>}></Route>
         <Route path='/lessons' element={<Lessons/>}></Route>
@@ -49,7 +42,6 @@ function App() {
         <Route path='/not-fount' element={<NotFound/>}></Route>
         <Route path='*' element={<Navigate to='/not-fount'/>}></Route>
       </Routes>
-    {/* </main> */}
   </>;
 }
 

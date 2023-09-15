@@ -1,8 +1,9 @@
 main{
     display: flex;
-    div{
+    margin: 10px;
+    div.students{
         width: 50%;
-        div:not(.unit-selection *){
+        div{
             width: initial;
             font-weight: bold;
             display: flex;
@@ -27,22 +28,19 @@ main{
                     cursor: pointer;
                 }
             }
+            .choose{
+                cursor: pointer;
+                &:hover{
+                    text-decoration: underline;
+                }
+            }
         }
     }
-    form:not(.unit-selection *){
+    div.unit-selection{
         width: 50%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        div{
-            display: flex;
-            margin-bottom: 5px;
-            label{
-                width: 160px;
-            }
-            input{
-                width: 200px;
-            }
+        text-align: right;
+        input{
+            display: inline;
         }
     }
 }

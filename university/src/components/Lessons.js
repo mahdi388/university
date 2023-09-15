@@ -4,15 +4,14 @@ import '../styles/students.scss'
 import { useState } from 'react'
 
 function Lessons() {
-    const {data:masters}=useGetMastersQuery()
-    const {data:lessons,error,isError,isLoading}=useGetLessonsQuery()
+    const {data:masters,isLoading:isMastersLoding}=useGetMastersQuery()
+    const {data:lessons,error,isError,isLoading:isLessonsLoding}=useGetLessonsQuery()
     const [addLesson,{isLoading:isAddingLesson}]=useAddLessonMutation()
     const [deleteLesson]=useDeleteLessonMutation()
     const [pager,setPager]=useState(1)
     const addLessonHandler=event=>{
         event.preventDefault()
         addLesson({
-            id:lessons[lessons.length-1].id+1,
             name:event.target['name'].value,
             units:Number(event.target['units'].value),
             master:Number(event.target['master'].value)
@@ -21,7 +20,7 @@ function Lessons() {
     }
     if (isError) {
         return <>خطا {error.status}</>
-    }if(isLoading){
+    }if(isLessonsLoding || isMastersLoding){
         return <>Loading...</>
     }
     if(lessons.length%10==0){
@@ -32,6 +31,9 @@ function Lessons() {
     const pagination=[]
     for (let i = 0; i <pageLen; i++) {
         pagination.push(lessons.slice(i*10,i*10+10))
+    }
+    if(lessons.length==0){
+        pagination.push([])
     }
     const increasePager=()=>{
         if (pager!==pageLen) {
